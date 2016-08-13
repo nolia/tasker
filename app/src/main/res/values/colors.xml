@@ -4,4 +4,9 @@
   <color name="colorPrimaryDark">#A7A7A7</color>
   <color name="colorAccent">#4A90E2</color>
   <color name="colorDivider">#212121</color>
+
+  <color name="taskStateNew">#B2D2F2</color>
+  <color name="taskStateWorking">#D6F4CB</color>
+  <color name="taskStateDone">#DADADA</color>
+
 </resources>

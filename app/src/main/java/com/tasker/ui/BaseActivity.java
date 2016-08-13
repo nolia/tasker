@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.tasker.R;
+import com.tasker.model.TaskManager;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
@@ -20,6 +22,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   @ViewById(R.id.toolbar)
   Toolbar toolbar;
+
+  @Bean
+  protected TaskManager taskManager;
 
   @CallSuper
   @AfterViews
