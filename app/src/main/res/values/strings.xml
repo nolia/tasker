@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Tasker</string>
+  <string name="task_list_title">Your tasks</string>
+  <string name="edit_task_activity_title">Edit task</string>
+</resources>
