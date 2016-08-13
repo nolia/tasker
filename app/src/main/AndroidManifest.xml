@@ -24,6 +24,7 @@
       android:name=".ui.EditTaskActivity_"
       android:screenOrientation="portrait"
       android:theme="@style/AppTheme"
+      android:windowSoftInputMode="adjustPan"
       />
 
   </application>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:showIn="@layout/activity_edit_task">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+      style="@style/TextLabel"
+      android:text="@string/title"/>
+
+    <EditText
+      android:id="@+id/taskTitle"
+      style="@style/TitleEditText"
+      android:hint="@string/buy_milk_hint"/>
+
+    <TextView
+      style="@style/TextLabel"
+      android:text="@string/description"
+      />
+
+    <EditText
+      android:id="@+id/taskDescription"
+      style="@style/DescriptionEditText"
+      android:hint="@string/buy_milk_hint"/>
+
+    <TextView
+      style="@style/TextLabel"
+      android:text="@string/state"
+      />
+
+
+    <LinearLayout
+      android:id="@+id/taskStateLayout"
+      style="@style/SegmentedLayout">
+
+
+      <TextView
+        style="@style/SegmentedButton"
+        android:text="@string/state_new"/>
+
+      <TextView
+        style="@style/SegmentedButton"
+        android:text="@string/state_working"/>
+
+      <TextView
+        style="@style/SegmentedButton"
+        android:text="@string/state_finished"/>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+</ScrollView>

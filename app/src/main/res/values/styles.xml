@@ -8,4 +8,68 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
+  <style name="TextLabel">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginLeft">24dp</item>
+    <item name="android:layout_marginTop">24dp</item>
+    <item name="android:paddingLeft">8dp</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+  </style>
+
+  <style name="SegmentedButton">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Button</item>
+    <item name="android:gravity">center</item>
+    <item name="android:padding">8dp</item>
+    <item name="android:background">?selectableItemBackground</item>
+  </style>
+
+  <style name="TitleEditText">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginLeft">24dp</item>
+    <item name="android:layout_marginRight">24dp</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+    <item name="android:inputType">textCapSentences</item>
+  </style>
+
+  <style name="DescriptionEditText">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">left|top</item>
+    <item name="android:layout_marginLeft">24dp</item>
+    <item name="android:layout_marginRight">24dp</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:maxLength">1024</item>
+    <item name="android:maxLines">5</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+    <item name="android:inputType">textCapSentences|textMultiLine</item>
+    <item name="android:isScrollContainer">false</item>
+  </style>
+
+  <style name="SegmentedLayout">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:layout_marginTop">16dp</item>
+    <item name="android:divider">@drawable/segmented_divider</item>
+    <item name="android:dividerPadding">4dp</item>
+    <item name="android:orientation">horizontal</item>
+    <item name="android:showDividers">middle</item>
+  </style>
+
+  <style name="FabBottom">
+    <item name="android:id">@id/fab</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">bottom|right</item>
+    <item name="android:layout_margin">20dp</item>
+    <item name="fabSize">normal</item>
+  </style>
+
 </resources>

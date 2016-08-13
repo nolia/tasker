@@ -1,5 +1,6 @@
 package com.tasker.ui;
 
+import android.support.annotation.CallSuper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,8 +21,9 @@ public abstract class BaseActivity extends AppCompatActivity {
   @ViewById(R.id.toolbar)
   Toolbar toolbar;
 
+  @CallSuper
   @AfterViews
-  final void setupToolbar() {
+  protected void afterViews() {
     setSupportActionBar(toolbar);
     final ActionBar actionBar = getSupportActionBar();
     if (actionBar != null) {
