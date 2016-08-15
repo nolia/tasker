@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.tasker.R;
-import com.tasker.model.TaskManager;
+import com.tasker.bean.TaskManager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
