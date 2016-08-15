@@ -51,4 +51,14 @@ public class TaskStorage {
 
     return false;
   }
+
+  public Task editTask(final int taskId, final String title, final String description) {
+    final Task task = getTask(taskId);
+    if (task != null) {
+      task.title = title;
+      task.description = description;
+    }
+
+    return task;
+  }
 }

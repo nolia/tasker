@@ -56,6 +56,28 @@ public class TaskManager {
     });
   }
 
+  public Observable<Task> getTaskById(final int id) {
+    return Observable.defer(() -> Observable.just(taskStorage.getTask(id)));
+  }
+
+  public Observable<Task> editTask(final int id, final String title, final String description) {
+    return Observable.defer(() -> {
+      final Task task = taskStorage.editTask(id, title, description);
+      saveTaskStorage();
+      return Observable.just(task);
+    });
+  }
+
+  public Observable<Boolean> deleteTask(final int id) {
+    return Observable.defer(() -> {
+      final boolean deleted = taskStorage.deleteTask(id);
+      if (deleted) {
+        notifyTaskListChanged();
+      }
+      return Observable.just(deleted);
+    });
+  }
+
   public Observable<List<Task>> getTasksChangedSubject() {
     return tasksSubject;
   }

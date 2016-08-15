@@ -1,7 +1,7 @@
 <resources>
   <string name="app_name">Tasker</string>
   <string name="task_list_title">Your tasks</string>
-  <string name="edit_task_activity_title">Edit task</string>
+  <string name="title_edit_task">Edit task</string>
   <string name="title">Title</string>
   <string name="buy_milk_hint">Buy milk...</string>
   <string name="state">State</string>
@@ -9,4 +9,6 @@
   <string name="state_new">New</string>
   <string name="state_working">Working</string>
   <string name="state_finished">Finished</string>
+  <string name="title_add_task">Add task</string>
+  <string name="delete">Delete</string>
 </resources>
