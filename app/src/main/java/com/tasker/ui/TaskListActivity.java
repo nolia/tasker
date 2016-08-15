@@ -1,13 +1,10 @@
 package com.tasker.ui;
 
 import android.content.Context;
-import android.support.annotation.ColorInt;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,6 @@ import android.widget.TextView;
 
 import com.tasker.R;
 import com.tasker.model.Task;
-import com.tasker.model.TaskState;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -29,14 +25,6 @@ import java.util.List;
  */
 @EActivity(R.layout.activity_task_list)
 public class TaskListActivity extends BaseActivity {
-
-  public static final SparseIntArray TASK_STATE_COLORS = new SparseIntArray();
-
-  static {
-    TASK_STATE_COLORS.put(TaskState.NEW, R.color.taskStateNew);
-    TASK_STATE_COLORS.put(TaskState.WORKING, R.color.taskStateWorking);
-    TASK_STATE_COLORS.put(TaskState.DONE, R.color.taskStateDone);
-  }
 
   @ViewById(R.id.fab)
   FloatingActionButton fab;
@@ -120,7 +108,7 @@ public class TaskListActivity extends BaseActivity {
       holder.title.setText(task.title);
       holder.description.setText(task.description);
 
-      holder.rootView.setBackgroundColor(getTaskStateColor(task));
+      holder.rootView.setBackgroundColor(Utils.getTaskStateColor(TaskListActivity.this, task.state));
       holder.rootView.setOnClickListener(view ->
           EditTaskActivity_.intent(TaskListActivity.this)
               .action(EditTaskActivity.ACTION_EDIT)
@@ -133,11 +121,6 @@ public class TaskListActivity extends BaseActivity {
     public int getItemCount() {
       return items.size();
     }
-  }
-
-  @ColorInt
-  private int getTaskStateColor(final Task task) {
-    return ContextCompat.getColor(this, TASK_STATE_COLORS.get(task.state, R.color.taskStateNew));
   }
 
   private class TaskViewHolder extends RecyclerView.ViewHolder {

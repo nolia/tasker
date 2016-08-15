@@ -78,6 +78,13 @@ public class TaskManager {
     });
   }
 
+  public Observable<Task> setTaskState(final int id, final int state) {
+    return getTaskById(id).doOnNext(task -> {
+      task.state = state;
+      saveTaskStorage();
+    });
+  }
+
   public Observable<List<Task>> getTasksChangedSubject() {
     return tasksSubject;
   }

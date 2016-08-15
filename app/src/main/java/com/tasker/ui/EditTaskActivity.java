@@ -3,9 +3,9 @@ package com.tasker.ui;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tasker.R;
 import com.tasker.model.Task;
@@ -17,6 +17,8 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
+
+import rx.Observable;
 
 /**
  *
@@ -49,8 +51,8 @@ public class EditTaskActivity extends BaseActivity {
   protected void afterViews() {
     super.afterViews();
     for (int i = 0; i < stateLayout.getChildCount(); i++) {
-      final int finalI = i;
-      stateLayout.getChildAt(i).setOnClickListener(view -> Toast.makeText(EditTaskActivity.this, "AAAA, view " + finalI, Toast.LENGTH_SHORT).show());
+      final int index = i;
+      stateLayout.getChildAt(i).setOnClickListener(view -> setTaskStateIndex(index));
     }
 
     if (isEditing()) {
@@ -87,10 +89,26 @@ public class EditTaskActivity extends BaseActivity {
     finish();
   }
 
+  private void setTaskStateIndex(final int index) {
+    taskState = index;
+    updateStateViews();
+  }
+
+  private void updateStateViews() {
+    for (int i = 0; i < stateLayout.getChildCount(); i++) {
+      final View view = stateLayout.getChildAt(i);
+      if (i == taskState) {
+        view.setBackgroundColor(Utils.getTaskStateColor(this, taskState));
+      } else {
+        Utils.setSelectableBackground(view);
+      }
+    }
+  }
+
   private void bindData(final Task task) {
     taskTitle.setText(task.title);
     taskDescription.setText(task.description);
-    taskState = task.state;
+    setTaskStateIndex(task.state);
 
   }
 
@@ -98,7 +116,11 @@ public class EditTaskActivity extends BaseActivity {
     final String title = taskTitle.getText().toString();
     final String description = taskDescription.getText().toString();
 
-    taskManager.editTask(taskId, title, description).subscribe();
+    Observable.zip(
+        taskManager.editTask(taskId, title, description),
+        taskManager.setTaskState(taskId, taskState),
+        (t1, t2) -> t1
+    ).subscribe();
   }
 
   private void createNewTask() {
