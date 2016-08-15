@@ -26,6 +26,8 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
+  useLibrary 'org.apache.http.legacy'
 }
 
 final def AAVersion = '4.0.0'
@@ -52,6 +54,7 @@ dependencies {
 
   testCompile 'junit:junit:4.12'
   testCompile 'org.robolectric:robolectric:3.0'
+  testCompile 'org.robolectric:shadows-httpclient:3.0'
   testCompile 'org.robospock:robospock:1.0.0'
   testCompile 'cglib:cglib-nodep:3.2.0'
 }
@@ -62,7 +65,7 @@ apt {
     // if you have multiple outputs (when using splits), you may want to have other index than 0
 
     // you should set your package name here if you are using different application IDs
-    // resourcePackageName "your.package.name"
+    resourcePackageName "com.tasker"
 
     // You can set optional annotation processing options here, like these commented options:
     // logLevel 'INFO'

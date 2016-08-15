@@ -42,26 +42,32 @@ public class TaskListActivity extends BaseActivity {
   FloatingActionButton fab;
 
   @ViewById(R.id.recyclerView)
-  RecyclerView recyclerView;
+  protected RecyclerView recyclerView;
 
   @ViewById(R.id.progressBar)
-  View progressBar;
+  protected View progressBar;
+
+  protected TaskRecyclerAdapter adapter;
 
   @Override
   protected void afterViews() {
     super.afterViews();
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    final TaskRecyclerAdapter adapter = new TaskRecyclerAdapter(this);
+    adapter = new TaskRecyclerAdapter(this);
     recyclerView.setAdapter(adapter);
 
-    taskManager.getTasks()
-        .doOnSubscribe(() -> showProgress(true))
-        .doOnEach(ignored -> showProgress(false))
-        .subscribe(adapter::setItems);
+    loadData();
 
     taskManager.getTasksChangedSubject().subscribe(
         adapter::setItems
     );
+  }
+
+  void loadData() {
+    taskManager.getTasks()
+        .doOnSubscribe(() -> showProgress(true))
+        .doOnEach(ignored -> showProgress(false))
+        .subscribe(adapter::setItems);
   }
 
   void showProgress(boolean show) {
@@ -81,17 +87,17 @@ public class TaskListActivity extends BaseActivity {
 
   @Click(R.id.fab)
   void onFab() {
-    EditTaskActivity_.intent(this).start();
+    EditTaskActivity_.intent(this)
+        .action(EditTaskActivity.ACTION_NEW)
+        .start();
   }
 
   private class TaskRecyclerAdapter extends RecyclerView.Adapter<TaskViewHolder> {
 
-    private final Context context;
     private final List<Task> items = new ArrayList<>();
     LayoutInflater layoutInflater;
 
     public TaskRecyclerAdapter(final Context context) {
-      this.context = context;
       layoutInflater = LayoutInflater.from(context);
     }
 
@@ -115,6 +121,12 @@ public class TaskListActivity extends BaseActivity {
       holder.description.setText(task.description);
 
       holder.rootView.setBackgroundColor(getTaskStateColor(task));
+      holder.rootView.setOnClickListener(view ->
+          EditTaskActivity_.intent(TaskListActivity.this)
+              .action(EditTaskActivity.ACTION_EDIT)
+              .taskId(task.id)
+              .start()
+      );
     }
 
     @Override

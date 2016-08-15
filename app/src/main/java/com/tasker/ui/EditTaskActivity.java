@@ -9,6 +9,7 @@ import com.tasker.R;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
 /**
@@ -16,6 +17,12 @@ import org.androidannotations.annotations.ViewById;
  */
 @EActivity(R.layout.activity_edit_task)
 public class EditTaskActivity extends BaseActivity {
+
+  public static final String ACTION_NEW = "new";
+  public static final String ACTION_EDIT = "edit";
+
+  @Extra
+  int taskId;
 
   @ViewById(R.id.taskStateLayout)
   LinearLayout stateLayout;
