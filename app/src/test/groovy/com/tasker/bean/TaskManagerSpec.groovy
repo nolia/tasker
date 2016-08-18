@@ -1,7 +1,7 @@
 package com.tasker.bean
 
 import com.tasker.BuildConfig
-import com.tasker.testutils.ObservableUtils
+import com.tasker.testutils.TestUtils
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robospock.RoboSpecification
@@ -11,7 +11,7 @@ import spock.util.mop.Use
 /**
  *
  */
-@Use(ObservableUtils)
+@Use(TestUtils)
 @Config(constants = BuildConfig, sdk = 21)
 class TaskManagerSpec extends RoboSpecification {
 

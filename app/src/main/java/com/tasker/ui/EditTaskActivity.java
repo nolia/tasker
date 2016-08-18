@@ -58,6 +58,8 @@ public class EditTaskActivity extends BaseActivity {
     if (isEditing()) {
       taskManager.getTaskById(taskId).subscribe(this::bindData);
     }
+
+    stateLayout.setVisibility(isEditing() ? View.VISIBLE : View.GONE);
   }
 
   @Override
