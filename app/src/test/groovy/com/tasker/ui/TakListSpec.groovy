@@ -1,7 +1,7 @@
 package com.tasker.ui
 
 import android.view.View
-import com.tasker.BuildConfig
+import android.widget.TextView
 import com.tasker.R
 import com.tasker.bean.TaskManager
 import com.tasker.model.Task
@@ -10,6 +10,7 @@ import org.robolectric.annotation.Config
 import org.robospock.RoboSpecification
 import rx.Observable
 import spock.lang.Narrative
+import spock.lang.Unroll
 
 import static org.robolectric.Shadows.shadowOf
 import static org.robolectric.shadows.ShadowView.clickOn
@@ -21,21 +22,49 @@ import static org.robolectric.shadows.ShadowView.clickOn
 As a user
 I can see my task list
 """)
-@Config(constants = BuildConfig, sdk = 21, manifest = "src/main/AndroidManifest.xml")
+@Config(sdk = 21, manifest = "src/main/AndroidManifest.xml")
 class TakListSpec extends RoboSpecification {
 
   TaskListActivity activity
+  TaskManager mockManager
 
   void setup() {
-    def mockManager = Mock(TaskManager)
+    mockManager = Mock(TaskManager)
     def ourTask = new Task()
     ourTask.id = 1
     ourTask.title = 'Some task'
 
-    mockManager.getTasks() >> Observable.just(Arrays.asList(ourTask))
+    this.mockManager.getTasks() >> Observable.just(Arrays.asList(ourTask))
 
     activity = Robolectric.setupActivity(TaskListActivity_.class)
-    activity.taskManager = mockManager
+    activity.taskManager = this.mockManager
+  }
+
+  @Unroll
+  def "user task list #name"(def name, def list) {
+    given: 'Given I am a user'
+
+    and: 'And I have 1 (2, 3, 4) saved task(s) in my list'
+    mockManager = Mock(TaskManager)
+
+    mockManager.getTasks() >> Observable.just(list)
+    activity.@taskManager = mockManager
+    activity.loadData()
+
+    when: "I open 'Task List' screen"
+    activity.@recyclerView.measure(0, 0)
+    activity.@recyclerView.layout(0, 0, 1000, 1000)
+
+    then: "I can see my 1 (2, 3, 4) tasks with its (their) info on screen"
+    def taskView = activity.@recyclerView.getChildAt(0)
+    (taskView.findViewById(R.id.taskTitle) as TextView).getText().toString() == name
+
+    where:
+    name      | list
+    "Task #1" | Arrays.asList(new Task(1, 'Task #1'))
+    "Task #3" | Arrays.asList(new Task(1, 'Task #3'), new Task(2, "Task2"))
+
+
   }
 
   def "click on add button"() {
@@ -69,8 +98,6 @@ class TakListSpec extends RoboSpecification {
 
     and: 'I cannot see task state'
     editTaskActivity.findViewById(R.id.taskStateLayout).getVisibility() != View.VISIBLE
-
-
   }
 
   def "open details"() {
