@@ -30,11 +30,10 @@ And I can see my task in the list
 And it has state 'New'
 
 ## Saving task data should be validated
-Given I'm on 'Add Task' screen
-When I leave field 'Title' blank
-And click on 'Save' button
-Then device vibrates 
-And 'Title' field is animated to show error and has focus
+given I'm on 'Add Task' screen
+when I leave field 'Title' blank
+and click on 'Save' button
+then Title field is animated to show error and has focus
  
 ## Changing task
 As a user
