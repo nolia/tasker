@@ -37,13 +37,13 @@ public class EditTaskActivity extends BaseActivity {
   MenuItem deleteMenuItem;
 
   @ViewById(R.id.taskStateLayout)
-  LinearLayout stateLayout;
+  protected LinearLayout stateLayout;
 
   @ViewById(R.id.taskTitle)
-  TextView taskTitle;
+  protected TextView taskTitle;
 
   @ViewById(R.id.taskDescription)
-  TextView taskDescription;
+  protected TextView taskDescription;
 
   int taskState;
 
